@@ -20,8 +20,12 @@ export default class Navbar extends Component {
                     <Link className="nav-link" to="/AddOwnersInfo">Add Owners Info</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</Link>
+                    <Link className="nav-link" to="/list-of-owners">Add Beg-Balance</Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/testSample/">Test</Link>
+                </li>
+                
                 </ul>
                 
             </div>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios  from 'axios';
 
+
+
 const Owners_info = props => {
     return(
         <tr>
@@ -10,13 +12,18 @@ const Owners_info = props => {
             <td>{props.owners_detail.unit_num}</td>
             <td>{props.owners_detail.water_m_num}</td>
             <td>{props.owners_detail.electric_m_num}</td>
+            {/* <td><NumberFormat>{props.owners_detail.condodues} thousandSeparator={true} prefix={'$'}</NumberFormat></td> */}
             <td>{props.owners_detail.condodues}</td>
             <td className="text-center">
                 <Link to={'/edit/'+props.owners_detail._id} className="btn btn-sm btn-primary">Edit</Link>
+                
+                
                 {/* <a href={'/edit/id'}  className="btn btn-sm
                 btn-primary">Edit</a> */}
+                
                 <a href="#" onClick={()=> {props.deleteOnwer(props.owners_detail._id)}} className="btn btn-sm
                 btn-danger">Delete</a>
+                {/* <Link to={'/add-water-beg-bal/'} className="btn btn-sm btn-primary">Add Beg</Link> */}
             </td>
 
         </tr>
@@ -35,6 +42,8 @@ export default class Ownerslist extends Component {
 
 
     }
+
+    
 
     componentDidMount(){
 
@@ -68,9 +77,11 @@ export default class Ownerslist extends Component {
 
     render(){
         return(
-            <div className="container">
-                <h1>Condo Owners List List</h1>
-                <table className="table table-bordered table-hover">
+            
+            <div className="container" style={{marginTop:30}}>
+                
+                <h1>Condo Owners List</h1>
+                <table className="table table-bordered table-hover" style={{marginTop:10}}>
                     <thead className="thead dark">
                         <tr>
                             <th>Owners Information</th>

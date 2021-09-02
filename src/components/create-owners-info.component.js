@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export default class Create_owners_info extends Component {
@@ -61,8 +61,7 @@ export default class Create_owners_info extends Component {
     render(){
         return(
             
-            <div className="container">
-                <div></div>
+            <div className="container"style={{marginTop:30}}>    
                 <h1>Create Owners List</h1>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -86,12 +85,6 @@ export default class Create_owners_info extends Component {
                     <div className="form-group">
                         <label>Water Meter Number</label>
                         <input type="Text" className="form-control" data-name="water_m_num" required onChange={this.
-                            onValueChange} ></input>
-                    </div>
-
-                    <div className="form-group">
-                        <label>Electric Meter Number</label>
-                        <input type="Text" className="form-control" data-name="electric_m_num" required onChange={this.
                             onValueChange} ></input>
                     </div>
 

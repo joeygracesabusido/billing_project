@@ -1,12 +1,30 @@
 import React, {Component} from 'react';
+
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import Select from 'react-select';
+
+// import { variationPlacements } from '@popperjs/core';
 
 // import NumberFormat from 'react-number-format';
 // var NumberFormat = require('react-number-format');
 
-export default class EditOwnersInfo extends Component {
 
+
+export default class WaterBegBalance extends Component {
+    // state = {
+    //     showModal: true
+    //   };
+    
+    //   openModal = () => {
+    //     this.setState({ showModal: true });
+    //   };
+    
+    //   closeModal = () => {
+    //     this.setState({ showModal: false });
+    //   };
+
+    
     constructor(props){
         super(props);
 
@@ -24,12 +42,7 @@ export default class EditOwnersInfo extends Component {
         this.onValueChange = this.onValueChange.bind(this);
 
     }
-    // onFullNameChange(e){
-    //     this.setState({
-    //         fullname: e.target.value
-    //     })
-    //     // console.log(e.target.value)
-    // }
+
     componentDidMount(){
         axios.get('http://localhost:4000/billing/edit-for-owners-info/'+this.props.match.params.id)
             .then(res => {
@@ -67,23 +80,20 @@ export default class EditOwnersInfo extends Component {
             unit_num : this.state.unit_num,
             water_m_num : this.state.water_m_num,
             electric_m_num : this.state.electric_m_num,
-            condodues : this.state.condodues
+            w_begging_balance : this.state.w_begging_balance
         }
 
-        axios.post('http://localhost:4000/billing/updateOwner/'+this.props.match.params.id, owners_detail)
-            .then(res => window.location = "/")
+        axios.post('http://localhost:4000/billing/add_w_beg_bal', owners_detail)
+            .then(res => window.location = "/list-of-owners")
             // .then(res => console.log(res.data))
             .catch(err => console.log('Error :'+ err));
-
-
-        // console.log(this.state);
-    }
-    
+    } 
     render(){
+        
         return(
             <div className="container" style={{marginTop:30}}>
-               
-                <h1>Update Health Declaration</h1>
+                
+                <h1>Add Beg. Balance for Water</h1>
             
                 <form onSubmit={this.onSubmit}>
                     
@@ -111,24 +121,22 @@ export default class EditOwnersInfo extends Component {
                             onValueChange} value={this.state.water_m_num} ></input>
                     </div>
 
-                    <div className="form-group">
-                        <label>Electric Meter Number</label>
-                        <input type="Text" className="form-control" data-name="electric_m_num" required onChange={this.
-                            onValueChange} value={this.state.electric_m_num}></input>
-                    </div>
+                    
 
                     <div className="form-group">
-                        <label>Condo Dues</label>
-                        <input type="number" step="0.01" className="form-control" data-name="condodues" required onChange={this.
-                            onValueChange} value={this.state.condodues} displayType={'text'} thousandSeparator={true} prefix={'P'} ></input>
+                        <label>Beginning Balance</label>
+                        <input type="number" step="0.01" className="form-control" data-name="w_begging_balance" required onChange={this.
+                            onValueChange}  displayType={'text'} thousandSeparator={true} prefix={'P'} ></input>
                     </div>
 
 
-                    <button type="submit" className="btn btn-primary">Update</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
 
                 </form>
                 
             </div>
+          
         )
+            
     }
 }

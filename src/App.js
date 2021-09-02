@@ -11,6 +11,13 @@ import Create_owners_info from './components/create-owners-info.component';
 import EditOwnersInfo from './components/edit-ownersinfo.component';
 import Ownerslist from './components/owners-info-list.component';
 
+import WaterBegBalance from './components/water-beg-balance.component';
+
+import Test from './components/test';
+import AddNewList from './components/test.components';
+import List_of_Owners from './components/onwerslist.component';
+
+
 function App() {
   return (
     <Router>
@@ -19,6 +26,10 @@ function App() {
       <Route path="/" exact component={Ownerslist} / >
       <Route path="/AddOwnersInfo" component={Create_owners_info} / >
       <Route path="/edit/:id" component={EditOwnersInfo} / >
+      <Route path="/add-beg-bal/:id" component={WaterBegBalance} / >
+      <Route path="/list-of-owners/" component={List_of_Owners} / >
+      <Route path="/testSample/" component={Test} / >
+      <Route path="/test2/" component={AddNewList} / >
     </Router>
       
   );

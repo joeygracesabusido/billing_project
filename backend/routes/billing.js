@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Owners_info = require('../models/owners.model');
+let Water_billing_beg_data = require('../models/waterbilling-data.model')
 
 router.route('/').get((req, res)=> {
     Owners_info.find()
@@ -59,5 +60,44 @@ router.route('/:id').delete((req, res) =>{
     .then(owners_detail => res.json('Record was deleted.'))
     .catch(err => res.status(400).json('Error :' + err));
 });
+
+// search function
+
+// var collection;
+
+// router.route('/search').get((req, res) =>{
+//     try{
+//         let result = await collection.aggregate([
+//             "$search": {
+//                 "autocomplete":{
+//                     "query":`${req.query.term}`,
+//                     "path":"owners_name",
+//                     "fuzzy":{
+//                         "maxEdits":2
+//                     }
+//                 }
+//             }
+//         ])
+//     }catch (e) {
+//         res.status(500).send({message: e.message})
+//     }
+// })
+
+// add beginning Balance
+router.route('/add_w_beg_bal').post((req, res)=> {
+    const owners_name = req.body.owners_name
+    const building_no = req.body.building_no
+    const unit_num = req.body.unit_num
+    const water_m_num = req.body.water_m_num
+    const w_begging_balance = req.body.w_begging_balance
+
+
+    const newWater_dataDeclarations = new Water_billing_beg_data({owners_name,building_no,unit_num,       
+                                                unit_num,water_m_num,w_begging_balance});
+
+    newWater_dataDeclarations.save()
+        .then(water_beg_balance => res.json('New Record Added'))
+        .catch(err => res.status(400).json('Error :' + err));
+})
 
 module.exports = router;

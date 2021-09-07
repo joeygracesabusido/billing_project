@@ -31,9 +31,6 @@ class Test extends React.Component {
   
   constructor(props){
     super(props)
-
-   
-
     this.state = {owners_detail: []}
 
 

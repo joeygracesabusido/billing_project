@@ -12,7 +12,7 @@ const Owners_info = props => {
            
             <td className="text-center">
                 <Link to={'/add-beg-bal/'+props.owners_detail._id} className="btn btn-sm btn-primary">Add Beg.Bal</Link>
-            
+                <Link to='/water-reading/' className="btn btn-sm btn-secondary">Water Reading</Link>
             </td>
 
         </tr>

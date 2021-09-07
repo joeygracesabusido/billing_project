@@ -4,6 +4,18 @@ const Schema = mongoose.Schema;
 
 const Water_cubic_dataSchema = new Schema({
 
+    date_from: {
+        type: Date,
+        required: true,
+        trim: true
+    },
+
+    date_to: {
+        type: Date,
+        required: true,
+        trim: true
+    },
+
     owners_name: {
         type: String,
         required: true,
@@ -42,6 +54,7 @@ const Water_cubic_dataSchema = new Schema({
         required: true,
         trim: true
     },
+    
 
 }, {
     timestamps: true

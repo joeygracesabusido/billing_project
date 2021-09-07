@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Select from 'react-select';
+// import Select from 'react-select';
 import Textfield from '@material-ui/core/Textfield';
 
 // import '../scr/water-reading.css';
@@ -11,9 +11,9 @@ import Textfield from '@material-ui/core/Textfield';
 
 // import NumberFormat from 'react-number-format';
 // var NumberFormat = require('react-number-format');
-var onwersInfo = [{
-    "label": "JEROME SABUSIDO"
-}]
+// var onwersInfo = [{
+//     "label": "JEROME SABUSIDO"
+// }]
 
 
 const divStyle = {
@@ -199,30 +199,29 @@ export default class WaterReading extends Component {
     }
 
 
-    // onSubmit(e){
-    //     e.preventDefault();
+    onSubmit(e){
+        e.preventDefault();
 
-    //     const water_beg_balance = {
-    //         owners_name : this.state.owners_name,
-    //         building_no : this.state.building_no,
-    //         unit_num : this.state.unit_num,
-    //         water_m_num : this.state.water_m_num,
-    //         electric_m_num : this.state.electric_m_num,
-    //         w_begging_balance : this.state.w_begging_balance
-    //     }
+        const water_cubic_data = {
+            date_from : this.state.date_from,
+            date_to : this.state.date_to,
+            owners_name : this.state.owner.owners_name,
+            building_no : this.state.owner.building_no,
+            unit_num : this.state.owner.unit_num,
+            water_m_num : this.state.owner.water_m_num,
+            w_begging_balance : this.state.owner.w_begging_balance,
+            w_reading_data : this.handlenum2,
+            w_cubic_reading : this.state.total
+           
+        }
 
-    //     axios.post('http://localhost:4000/billing/add_w_beg_bal', water_beg_balance)
-    //         .then(res => window.location = "/list-of-owners")
-    //         // .then(res => console.log(res.data))
-    //         .catch(err => console.log('Error :'+ err));
-    // } 
+        axios.post('http://localhost:4000/billing/water-reading', water_cubic_data)
+            .then(res => window.location = "/list-of-owners")
+            // .then(res => console.log(res.data))
+            .catch(err => console.log('Error :'+ err));
+    } 
 
-    Owners_Detail() {
-        return this.state.water_beg_balance.map(currentOwners => {
-            return <Owners_info water_beg_balance={currentOwners} key={currentOwners._id}
-            />
-        })
-    }
+    
 
 
 
@@ -257,7 +256,7 @@ export default class WaterReading extends Component {
                             id="date"
                             type="date"
                             defaultValue="2021-01-01"
-                            data-name="owners_name"
+                            data-name="date_from"
                             InputLabelProps={{
                                 shrink: true,
                             }}>
@@ -272,7 +271,7 @@ export default class WaterReading extends Component {
                             id="date"
                             type="date"
                             defaultValue="2021-01-01"
-                            data-name="owners_name"
+                            data-name="date_to"
                             InputLabelProps={{
                                 shrink: true,
                             }}>
@@ -283,8 +282,8 @@ export default class WaterReading extends Component {
 
                     <div className="form-group" >
                         <label style={labelStyle}>Owner's Name </label>
-                        <input type="text" className="form-control" data-name="owners_name" required onChange={this.
-                            onValueChange} value={this.state.owner.owners_name} input width="10" style={inputStyle} >
+                        <input type="text" className="form-control" data-name="owners_name" required onChange=
+                        {this.onValueChange} value={this.state.owner.owners_name}  style={inputStyle} >
 
                         </input>
                         <p></p>
@@ -301,20 +300,28 @@ export default class WaterReading extends Component {
 
                     <div className="form-group">
                         <label>Building Number</label>
-                        <input type="Text" className="form-control" data-name="building_no" required onChange={this.
-                            onValueChange} value={this.state.owner.building_no} style={inputStyle} ></input>
+                        <input type="Text" 
+                        className="form-control"
+                        data-name="building_no" 
+                        required onChange={this.onValueChange} 
+                        value={this.state.owner.building_no} style={inputStyle} ></input>
                     </div>
 
                     <div className="form-group">
                         <label>Unit Number</label>
-                        <input type="Text" className="form-control" data-name="unit_num" required onChange={this.
-                            onValueChange} value={this.state.owner.unit_num} style={inputStyle}></input>
+                        <input type="Text"
+                        className="form-control" 
+                        data-name="unit_num" 
+                        required onChange={this.onValueChange} 
+                        value={this.state.owner.unit_num} style={inputStyle}></input>
                     </div>
 
                     <div className="form-group">
                         <label>Water Meter Number</label>
-                        <input type="Text" className="form-control" data-name="water_m_num" required onChange={this.
-                            onValueChange} value={this.state.owner.water_m_num} style={inputStyle} ></input>
+                        <input type="Text" className="form-control" 
+                        data-name="water_m_num" 
+                        required onChange={this.onValueChange} 
+                        value={this.state.owner.water_m_num} style={inputStyle} ></input>
                     </div>
 
 
@@ -327,8 +334,7 @@ export default class WaterReading extends Component {
                             className="form-control"
                             data-name="w_begging_balance"
                             required
-                            onChange={this.
-                                onValueChange}
+                            onChange={this.onValueChange}
                             value={this.state.owner.w_begging_balance}
                             // onChange={this.
                             //     handlenum1}
@@ -346,8 +352,8 @@ export default class WaterReading extends Component {
                             type="number"
                             step="0.01"
                             className="form-control"
-                            onChange={this.
-                                handlenum2}
+                            data-name="w_reading_data"
+                            onChange={this.handlenum2}
                             value={this.state.num2}
 
 
@@ -361,7 +367,7 @@ export default class WaterReading extends Component {
                             // type="number"
                             // step="0.01"
                             className="form-control"
-
+                            data-name="w_cubic_reading"
                             value={this.state.total}
 
                             style={inputStyle}

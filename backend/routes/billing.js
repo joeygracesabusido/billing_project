@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { request, response } = require('express');
+
 let Owners_info = require('../models/owners.model');
 let Water_billing_beg_data = require('../models/waterbilling-data.model')
+let Water_cubic_data = require('../models/water-reading.model')
 
 router.route('/').get((req, res) => {
     Owners_info.find()
@@ -21,7 +23,7 @@ router.route('/add_ownersinfo').post((req, res) => {
 
     const newOwners_infoDeclarations = new Owners_info({
         owners_name, building_no, unit_num,
-        unit_num, water_m_num, electric_m_num, condodues
+        water_m_num, electric_m_num, condodues
     });
 
     newOwners_infoDeclarations.save()
@@ -65,7 +67,7 @@ router.route('/:id').delete((req, res) => {
 });
 
 // search function
-var collection;
+
 router.route('/get/:id').get((req, res) => {
     try {
         Water_billing_beg_data.findOne({ "_id": req.params.id })
@@ -90,7 +92,7 @@ router.route('/add_w_beg_bal').post((req, res) => {
 
     const newWater_dataDeclarations = new Water_billing_beg_data({
         owners_name, building_no, unit_num,
-        unit_num, water_m_num, w_begging_balance
+        water_m_num, w_begging_balance
     });
 
     newWater_dataDeclarations.save()
@@ -174,5 +176,37 @@ router.route('/water-beg-bal/:id').get((req, res) => {
         .then(water_beg_balance => res.json(water_beg_balance))
         .catch(err => res.status(400).json('Error :' + err));
 });
+
+// save water reading to mongo db
+router.route('/water-reading').post((req, res) => {
+    const date_from = req.body.date_from
+    const date_to = req.body.date_to
+    const owners_name = req.body.owners_name
+    const building_no = req.body.building_no
+    const unit_num = req.body.unit_num
+    const water_m_num = req.body.water_m_num
+    const w_begging_balance = req.body.w_begging_balance
+    const w_reading_data = req.body.w_reading_data
+    const w_cubic_reading = req.body.w_cubic_reading
+
+
+    const newWater_dataDeclarations = new Water_cubic_data({
+        date_from, date_to, owners_name, building_no, unit_num,
+        water_m_num, w_begging_balance, w_reading_data,  w_cubic_reading
+    });
+
+    newWater_dataDeclarations.save()
+        .then(water_cubic_data => res.json('New Record Added'))
+        .catch(err => res.status(400).json('Error :' + err));
+})
+
+// for water reading list
+
+router.route('/water-reading-list').get((req, res) => {
+    Water_cubic_data.find()
+        .then(water_cubic_data => res.json(water_cubic_data))
+        .catch(err => res.status(400).json('Error :' + err));
+})
+
 
 module.exports = router;

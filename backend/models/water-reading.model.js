@@ -1,3 +1,4 @@
+const { TextareaAutosize } = require('@material-ui/core');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -6,13 +7,13 @@ const Water_cubic_dataSchema = new Schema({
 
     date_from: {
         type: Date,
-        required: true,
+        required: false,
         trim: true
     },
 
     date_to: {
         type: Date,
-        required: true,
+        required: false,
         trim: true
     },
 

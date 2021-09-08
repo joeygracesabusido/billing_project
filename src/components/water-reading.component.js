@@ -79,6 +79,7 @@ export default class WaterReading extends Component {
                 unit_num: "",
                 water_m_num: "",
                 w_begging_balance: ""
+               
                 // num2: "",
                 // total: ""
 
@@ -104,6 +105,8 @@ export default class WaterReading extends Component {
 
         this.handlenum1 = this.handlenum1.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.datefrom = this.datefrom.bind(this);
+        this.dateto = this.dateto.bind(this);
         // ito yon sir
 
     }
@@ -193,6 +196,20 @@ export default class WaterReading extends Component {
 
     }
 
+    datefrom = (e) => {
+        this.setState({
+            date_from: e.target.value
+        })
+
+    }
+
+    dateto = (e) => {
+        this.setState({
+            date_to: e.target.value
+        })
+
+    }
+
     sayHello = (e) => {
         e.preventDefault();
         this.setState({ total: parseFloat(this.state.num2) - parseFloat(this.state.owner.w_begging_balance) })
@@ -202,24 +219,26 @@ export default class WaterReading extends Component {
 
 
 
-    onSubmit(e){
+    onSubmit(e) {
         e.preventDefault();
+        
 
-        const {water_cubic_data} = {
+        const water_cubic_data = {
+           
+            owners_name : this.state.owner.owners_name,
+            building_no : this.state.owner.building_no,
+            unit_num : this.state.owner.unit_num,
+            water_m_num : this.state.owner.water_m_num,
+            w_begging_balance : this.state.owner.w_begging_balance,
             date_from : this.state.date_from,
             date_to : this.state.date_to,
-            owners_name : this.state.owners_name,
-            building_no : this.state.building_no,
-            unit_num : this.state.unit_num,
-            water_m_num : this.state.water_m_num,
-            w_begging_balance : this.state.w_begging_balance,
             w_reading_data : this.state.num2,
             w_cubic_reading : this.state.total
            
         }
-
+        
         axios({
-            url: `http://localhost:4000/billing/water-reading-save`,
+            url: 'http://localhost:4000/billing/water-reading-save',
             method: 'POST',
             data: water_cubic_data
         })
@@ -256,7 +275,7 @@ export default class WaterReading extends Component {
                 </ul> */}
 
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group" style={divStyle} >
+                    {/* <div className="form-group" style={divStyle} >
                         <label>
                             Date from :
                         </label>
@@ -266,6 +285,8 @@ export default class WaterReading extends Component {
                             type="date"
                             defaultValue="2021-01-01"
                             data-name="date_from"
+                            
+                            value={this.state.date_from}
                             InputLabelProps={{
                                 shrink: true,
                             }}>
@@ -281,12 +302,39 @@ export default class WaterReading extends Component {
                             type="date"
                             defaultValue="2021-01-01"
                             data-name="date_to"
+                            
+                            value={this.state.date_to}
                             InputLabelProps={{
                                 shrink: true,
                             }}>
                         </Textfield>
 
                         <p></p>
+                    </div> */}
+                    <div className="form-group">
+                        <label>date From</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            data-name="date_from"
+                            onChange={this.datefrom}
+                            value={this.state.date_from}
+                            style={inputStyle}
+                        
+                        /> 
+
+                        <label>date To</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            data-name="date_to"
+                            onChange={this.dateto}
+                            value={this.state.date_to}
+                           
+                            style={inputStyle}
+                        
+                        />
+                        
                     </div>
 
                     <div className="form-group" >
@@ -390,9 +438,6 @@ export default class WaterReading extends Component {
 
                 
                 </form >
-
-
-
 
             </div >
 

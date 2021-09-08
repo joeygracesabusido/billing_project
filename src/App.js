@@ -17,8 +17,11 @@ import Test from './components/test';
 import AddNewList from './components/test.components';
 import List_of_Owners from './components/onwerslist.component';
 import WaterReading from './components/water-reading.component';
+import List_of_waterReading from './components/Water_reading_list';
 
 // import './water-reading.css';
+
+// import water_reading_list from './components/Water_reading_list'
 
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
       <Route path="/water-reading/" component={WaterReading} />
       <Route path="/testSample/" component={Test} />
       <Route path="/test2/" component={AddNewList} />
+      <Route path="/water-reading-list/" component={List_of_waterReading} />
     </Router>
 
   );

@@ -34,29 +34,7 @@ const labelStyle = {
 };
 
 
-const Owners_info = props => {
-    return (
-        <h1>
-            {props.water_beg_balance.unit_num}
-        </h1>
-        // <div className="form-group">
-        //     <label>Owner's Name</label>
-        //     <input type="text" className="form-control" data-name="owners_name" 
-        //          value={props.water_beg_balance.owners_name} />
-        // </div>
-        // <tr>
-        //     <td>{props.water_beg_balance.owners_name}</td>
 
-
-        //     <td className="text-center">
-
-        //         <Link to={'/water-reading/'+props.water_beg_balance._id} className="btn btn-sm btn-secondary">Water Reading</Link>
-        //     </td>
-
-        // </tr>
-    )
-
-}
 
 // Wala ka palang modal component
 // Next mong gawin search suggestion 
@@ -79,7 +57,7 @@ export default class WaterReading extends Component {
                 unit_num: "",
                 water_m_num: "",
                 w_begging_balance: ""
-               
+
                 // num2: "",
                 // total: ""
 
@@ -221,34 +199,34 @@ export default class WaterReading extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        
+
 
         const water_cubic_data = {
-           
-            owners_name : this.state.owner.owners_name,
-            building_no : this.state.owner.building_no,
-            unit_num : this.state.owner.unit_num,
-            water_m_num : this.state.owner.water_m_num,
-            w_begging_balance : this.state.owner.w_begging_balance,
-            date_from : this.state.date_from,
-            date_to : this.state.date_to,
-            w_reading_data : this.state.num2,
-            w_cubic_reading : this.state.total
-           
+
+            owners_name: this.state.owner.owners_name,
+            building_no: this.state.owner.building_no,
+            unit_num: this.state.owner.unit_num,
+            water_m_num: this.state.owner.water_m_num,
+            w_begging_balance: this.state.owner.w_begging_balance,
+            date_from: this.state.date_from,
+            date_to: this.state.date_to,
+            w_reading_data: this.state.num2,
+            w_cubic_reading: this.state.total
+
         }
-        
+
         axios({
             url: 'http://localhost:4000/billing/water-reading-save',
             method: 'POST',
             data: water_cubic_data
         })
-            .then(res => window.location = "/list-of-owners")
-            .catch(err => console.log('Error :'+ err));
+            .then(res => window.location = "/water-reading-list")
+            .catch(err => console.log('Error :' + err));
         // axios.post('http://localhost:4000/billing/water-reading-save', water_cubic_data)
         //     .then(res => window.location = "/list-of-owners")
         //     // .then(res => console.log(res.data))
         //     .catch(err => console.log('Error :'+ err));
-    } 
+    }
 
     render() {
 
@@ -256,8 +234,8 @@ export default class WaterReading extends Component {
             <div className="container" style={{ marginTop: 30 }}  >
 
                 <h1>Add Water Meter Reading</h1>
-               
-                
+
+
 
                 {/* <div>
                     {this.Owners_Detail()}
@@ -320,8 +298,8 @@ export default class WaterReading extends Component {
                             onChange={this.datefrom}
                             value={this.state.date_from}
                             style={inputStyle}
-                        
-                        /> 
+
+                        />
 
                         <label>date To</label>
                         <input
@@ -330,17 +308,17 @@ export default class WaterReading extends Component {
                             data-name="date_to"
                             onChange={this.dateto}
                             value={this.state.date_to}
-                           
+
                             style={inputStyle}
-                        
+
                         />
-                        
+
                     </div>
 
                     <div className="form-group" >
                         <label style={labelStyle}>Owner's Name </label>
                         <input type="text" className="form-control" data-name="owners_name" required onChange=
-                        {this.onValueChange} value={this.state.owner.owners_name}  style={inputStyle} >
+                            {this.onValueChange} value={this.state.owner.owners_name} style={inputStyle} >
 
                         </input>
                         <p></p>
@@ -357,28 +335,28 @@ export default class WaterReading extends Component {
 
                     <div className="form-group">
                         <label>Building Number</label>
-                        <input type="Text" 
-                        className="form-control"
-                        data-name="building_no" 
-                        required onChange={this.onValueChange} 
-                        value={this.state.owner.building_no} style={inputStyle} ></input>
+                        <input type="Text"
+                            className="form-control"
+                            data-name="building_no"
+                            required onChange={this.onValueChange}
+                            value={this.state.owner.building_no} style={inputStyle} ></input>
                     </div>
 
                     <div className="form-group">
                         <label>Unit Number</label>
                         <input type="Text"
-                        className="form-control" 
-                        data-name="unit_num" 
-                        required onChange={this.onValueChange} 
-                        value={this.state.owner.unit_num} style={inputStyle}></input>
+                            className="form-control"
+                            data-name="unit_num"
+                            required onChange={this.onValueChange}
+                            value={this.state.owner.unit_num} style={inputStyle}></input>
                     </div>
 
                     <div className="form-group">
                         <label>Water Meter Number</label>
-                        <input type="Text" className="form-control" 
-                        data-name="water_m_num" 
-                        required onChange={this.onValueChange} 
-                        value={this.state.owner.water_m_num} style={inputStyle} ></input>
+                        <input type="Text" className="form-control"
+                            data-name="water_m_num"
+                            required onChange={this.onValueChange}
+                            value={this.state.owner.water_m_num} style={inputStyle} ></input>
                     </div>
 
 
@@ -436,7 +414,7 @@ export default class WaterReading extends Component {
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </p>
 
-                
+
                 </form >
 
             </div >

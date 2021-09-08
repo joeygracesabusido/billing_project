@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import axios  from 'axios';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 const Owners_info = props => {
-    return(
+    return (
         <tr>
             <td>{props.owners_detail.owners_name}</td>
-            
-           
+
+
             <td className="text-center">
-                <Link to={'/add-beg-bal/'+props.owners_detail._id} className="btn btn-sm btn-primary">Add Beg.Bal</Link>
+                <Link to={'/add-beg-bal/' + props.owners_detail._id} className="btn btn-sm btn-primary">Add Beg.Bal</Link>
                 <Link to='/water-reading/' className="btn btn-sm btn-secondary">Water Reading</Link>
             </td>
 
@@ -22,49 +22,48 @@ const Owners_info = props => {
 
 export default class List_of_Owners extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state = {owners_detail: []}
+        this.state = { owners_detail: [] }
 
 
     }
 
-    
 
-    componentDidMount(){
+
+    componentDidMount() {
 
         axios.get('http://localhost:4000/billing/')
             .then(res => {
-                this.setState({owners_detail: res.data})
-                
+                this.setState({ owners_detail: res.data })
+
             })
             .catch(error => {
                 console.log(error);
             })
-            
+
     }
 
-    
 
-    Owners_Detail()
-    {
+
+    Owners_Detail() {
         return this.state.owners_detail.map(currentOwners => {
-            return <Owners_info owners_detail={currentOwners}  key={currentOwners._id}
+            return <Owners_info owners_detail={currentOwners} key={currentOwners._id}
             />
         })
     }
 
-    render(){
-        return(
-            
-            <div className="container" style={{marginTop:30}}>
-                
+    render() {
+        return (
+
+            <div className="container" style={{ marginTop: 30 }}>
+
                 <h1>Condo Owners List</h1>
-                <table className="table table-bordered table-hover" style={{marginTop:10}}>
+                <table className="table table-bordered table-hover" style={{ marginTop: 10 }}>
                     <thead className="thead dark">
                         <tr>
                             <th>Owners Information</th>
-                            
+
                             <th className="text-center">Action</th>
                         </tr>
                     </thead>

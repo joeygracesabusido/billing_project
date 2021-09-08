@@ -103,6 +103,7 @@ export default class WaterReading extends Component {
         this.handlenum2 = this.handlenum2.bind(this);
 
         this.handlenum1 = this.handlenum1.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         // ito yon sir
 
     }
@@ -199,31 +200,36 @@ export default class WaterReading extends Component {
     }
 
 
+
+
     onSubmit(e){
         e.preventDefault();
 
-        const water_cubic_data = {
+        const {water_cubic_data} = {
             date_from : this.state.date_from,
             date_to : this.state.date_to,
-            owners_name : this.state.owner.owners_name,
-            building_no : this.state.owner.building_no,
-            unit_num : this.state.owner.unit_num,
-            water_m_num : this.state.owner.water_m_num,
-            w_begging_balance : this.state.owner.w_begging_balance,
-            w_reading_data : this.handlenum2,
+            owners_name : this.state.owners_name,
+            building_no : this.state.building_no,
+            unit_num : this.state.unit_num,
+            water_m_num : this.state.water_m_num,
+            w_begging_balance : this.state.w_begging_balance,
+            w_reading_data : this.state.num2,
             w_cubic_reading : this.state.total
            
         }
 
-        axios.post('http://localhost:4000/billing/water-reading', water_cubic_data)
+        axios({
+            url: `http://localhost:4000/billing/water-reading-save`,
+            method: 'POST',
+            data: water_cubic_data
+        })
             .then(res => window.location = "/list-of-owners")
-            // .then(res => console.log(res.data))
             .catch(err => console.log('Error :'+ err));
+        // axios.post('http://localhost:4000/billing/water-reading-save', water_cubic_data)
+        //     .then(res => window.location = "/list-of-owners")
+        //     // .then(res => console.log(res.data))
+        //     .catch(err => console.log('Error :'+ err));
     } 
-
-    
-
-
 
     render() {
 
@@ -231,6 +237,9 @@ export default class WaterReading extends Component {
             <div className="container" style={{ marginTop: 30 }}  >
 
                 <h1>Add Water Meter Reading</h1>
+               
+                
+
                 {/* <div>
                     {this.Owners_Detail()}
                 </div>
@@ -364,8 +373,8 @@ export default class WaterReading extends Component {
                     <div className="form-group">
                         <label>Total Water Cubic Reading</label>
                         <input
-                            // type="number"
-                            // step="0.01"
+                            type="number"
+                            step="0.01"
                             className="form-control"
                             data-name="w_cubic_reading"
                             value={this.state.total}
@@ -379,7 +388,7 @@ export default class WaterReading extends Component {
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </p>
 
-
+                
                 </form >
 
 

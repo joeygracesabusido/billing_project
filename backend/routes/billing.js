@@ -178,7 +178,7 @@ router.route('/water-beg-bal/:id').get((req, res) => {
 });
 
 // save water reading to mongo db
-router.route('/water-reading').post((req, res) => {
+router.route('/water-reading-save').post((req, res) => {
     const date_from = req.body.date_from
     const date_to = req.body.date_to
     const owners_name = req.body.owners_name

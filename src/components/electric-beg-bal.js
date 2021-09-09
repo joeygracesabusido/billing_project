@@ -47,7 +47,7 @@ export const Electric_beg_Bal = () => {
             
         });
 
-    },[]
+    }
 
     })
     // useEffect(() => {

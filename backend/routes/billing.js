@@ -208,5 +208,29 @@ router.route('/water-reading-list').get((req, res) => {
         .catch(err => res.status(400).json('Error :' + err));
 })
 
+// this is for electric water balance
+
+router
+    .route('/search-ownerinfo')
+    .get(async (req, res, next) => {
+        try {
+            const result = await Owners_info
+                .findOne({
+                    owners_name: {
+                        $regex: req.query.term, // match either same value
+                        $options: 'i' // case insensitive
+                    }
+                });
+
+            if (!result) {
+                return res.status(404).send({ message: 'No record found.' });
+            }
+
+            res.send(result);
+            
+        } catch (e) {
+            res.status(500).send({ message: e.message })
+        }
+    })
 
 module.exports = router;

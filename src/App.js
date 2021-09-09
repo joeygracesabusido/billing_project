@@ -19,6 +19,10 @@ import List_of_Owners from './components/onwerslist.component';
 import WaterReading from './components/water-reading.component';
 import List_of_waterReading from './components/Water_reading_list';
 
+import {Electric_beg_Bal} from './components/electric-beg-bal';
+import {Testmodal} from './components/Testmodal'
+// import { Switch } from '@material-ui/core';
+
 // import './water-reading.css';
 
 // import water_reading_list from './components/Water_reading_list'
@@ -38,6 +42,9 @@ function App() {
       <Route path="/testSample/" component={Test} />
       <Route path="/test2/" component={AddNewList} />
       <Route path="/water-reading-list/" component={List_of_waterReading} />
+      <Route path="/test-modal/" component={Electric_beg_Bal} />
+      <Route path="/TestModal/" component={Testmodal} />
+          
     </Router>
 
   );

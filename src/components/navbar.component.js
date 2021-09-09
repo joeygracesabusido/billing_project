@@ -28,6 +28,9 @@ export default class Navbar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/water-reading-list/">Reading List</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/test-modal/">Add Electric Bill</Link>
+                            </li>
 
 
                         </ul>

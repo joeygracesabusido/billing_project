@@ -2,8 +2,10 @@ const router = require('express').Router();
 const { request, response } = require('express');
 
 let Owners_info = require('../models/owners.model');
-let Water_billing_beg_data = require('../models/waterbilling-data.model')
-let Water_cubic_data = require('../models/water-reading.model')
+let Water_billing_beg_data = require('../models/waterbilling-data.model');
+let Water_cubic_data = require('../models/water-reading.model');
+let Electric_billing_beg_data = require('../models/electric-reading,model')
+
 
 router.route('/').get((req, res) => {
     Owners_info.find()
@@ -232,5 +234,30 @@ router
             res.status(500).send({ message: e.message })
         }
     })
+
+// this is to save electric water balance
+
+router.route('/electric-reading-save').post((req, res) => {
+    
+    const owners_name = req.body.owners_name
+    const building_no = req.body.building_no
+    const unit_num = req.body.unit_num
+    const electric_m_num = req.body.electric_m_num
+    const e_begging_balance = req.body.e_begging_balance
+    
+
+
+    const newelectric_dataDeclarations = new Electric_billing_beg_data({
+         owners_name, building_no, unit_num,
+         electric_m_num, e_begging_balance
+    });
+
+    newelectric_dataDeclarations.save()
+        .then(electric_beg_balance => res.json('New Record Added'))
+        .catch(err => res.status(400).json('Error :' + err));
+
+    // Kailangan mo magreturn ng response
+    // res.send({ success: true });
+})
 
 module.exports = router;

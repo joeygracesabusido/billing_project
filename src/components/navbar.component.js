@@ -29,7 +29,7 @@ export default class Navbar extends Component {
                                 <Link className="nav-link" to="/water-reading-list/">Reading List</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/test-modal/">Add Electric Bill</Link>
+                                <Link className="nav-link" to="/electric-beg-bal/">Add Electric Bill</Link>
                             </li>
 
 

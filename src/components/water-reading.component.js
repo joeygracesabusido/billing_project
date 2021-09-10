@@ -133,7 +133,7 @@ export default class WaterReading extends Component {
 
             }
 
-
+            // console.log(data.owners_name)
 
         } catch (err) {
             this.openModal();

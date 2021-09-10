@@ -3,7 +3,13 @@ import { Button,Modal} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+const input2Style ={
+    width: '215px',
+    display: 'inline-block',
+    height:'30px',
+    margin: '5px'
 
+}
 const inputStyle = {
     width: '300px',
     display: 'inline-block',
@@ -20,36 +26,81 @@ const labelStyle = {
     
 };
 
-export const Electric_beg_Bal = () => {
-   
+export const Electric_beg_Bal = ({ history }) => {
     const [showModal,setshowModal] = useState(false);
-    const [posts, setPosts] = useState([]);
+    
+    // Separate state for the search input so that you can clear it later
+    const [searchValue, setSearchValue] = useState('');
+    // Separate state for the Data, use object instead
+    const [owner, setOwner] = useState({});
+    const [begBalance, setBegBalance] = useState('');
+    
+    // useEffect(() => {
+    //   console.log(ownersName)
+    // }, [ownersName]);
+
+
 
     const manageState = () => {
+
         setshowModal(!setshowModal)
     }
 
-    useEffect(() => {
-      const data = axios({
-        method: 'GET',
-        url: `http://localhost:4000/billing/`,
-        params: {
-          term: setPosts.owners_name,
-      }
-      })
-      if (data) {
-        setPosts({
-                owners_name: data.owners_name,
-                building_no: data.building_no,
-                unit_num: data.unit_num,
-                water_m_num: data.water_m_num,
-                w_begging_balance: data.w_begging_balance,
-            
-        });
-
+    const onSearchValueChange = (e) => {
+      setSearchValue(e.target.value);
     }
 
-    })
+    const onBegBalanceValueChange = (e) => {
+      setBegBalance(e.target.value);
+    }
+
+    const searchOwner = async () => {
+      try {
+        const {data} = await axios({
+          method: 'GET',
+          url: `http://localhost:4000/billing/search-ownerinfo`,
+          params: {
+            term: searchValue,
+        }
+        })
+        
+        if (data) {
+          setOwner(data)
+          setSearchValue('');
+        }
+        console.log(data)
+      } catch (err) {
+        console.log(err);
+        setOwner({}); // Clear the fields if no data or error has occured.
+      }
+    }
+
+    // ipass mo nalang to sa onClick handler kay button
+    const saveElectricBill = async () => {
+      try {
+        // Check if the owner object is not empty
+        if (Object.values(owner).length > 0) {
+          const data = { ...owner, e_begging_balance: begBalance };
+
+          await axios({
+            method: 'POST',
+            url: `http://localhost:4000/billing/electric-reading-save`,
+            data
+          });
+
+          // kung gusto mo magredirect to another router upon successful saving
+          history.push('/'); 
+
+          alert('Saved!');
+        }
+      } catch (err) {
+        alert(err);
+        console.log(err);
+      }
+    }
+
+    
+    
     // useEffect(() => {
     //   axios.get(`http://localhost:4000/billing/`)
     //   .then(res => {
@@ -66,12 +117,13 @@ export const Electric_beg_Bal = () => {
 
     return (
         <>
-      <div style={{marginTop:40}}>
+      <div style={{marginTop:70}}>
       
         
       </div>
       {manageState && (
         <div className="" id="addnewlist">
+          
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -80,13 +132,39 @@ export const Electric_beg_Bal = () => {
 
               <div className="modal-body">
                 
-                <label style={labelStyle}>Owners Name</label>
+                <label style={labelStyle}>Search Owner</label>
                 <input
                     type="type"
                     className="form-control"
                     data-name="date_from"
-                    // onChange={this.datefrom}
-                    // value={this.state.date_from}
+                    onChange={onSearchValueChange}
+                     
+                    value= {searchValue}
+                    style={input2Style}
+
+                />
+                <button
+                
+                type="button"
+                  className="btn btn-primary"
+                  onClick={searchOwner}
+                >
+                  Search
+              </button>
+                <label style={labelStyle}>Owner's Name</label>
+                <input
+                    type="type"
+                    className="form-control"
+                    data-name="date_from"
+                    // required onChange={(e) => {
+                    //   setOwnersName(e.target.value);
+                    // }}
+                    // value  ={(e) => {
+                    //   setOwnersName(e.target.value);
+                    // }}
+                    // Ginamit ko yung ? for optional chaining. Ang initial properties ni owner ay empty kaya 
+                    // dapat optional lang iaccess yung owners_name
+                    value= {owner?.owners_name || ''}
                     style={inputStyle}
 
                 />
@@ -98,7 +176,8 @@ export const Electric_beg_Bal = () => {
                     className="form-control"
                     data-name="date_from"
                     // onChange={this.datefrom}
-                    // value={this.state.date_from}
+                    value={owner?.building_no || ''}
+                    
                     style={inputStyle}
 
                 />
@@ -107,9 +186,9 @@ export const Electric_beg_Bal = () => {
                 <input
                     type="input"
                     className="form-control"
-                    data-name="date_from"
+                    
                     // onChange={this.datefrom}
-                    // value={this.state.date_from}
+                    value={owner?.unit_num || ''}
                     style={inputStyle}
 
                 />
@@ -118,9 +197,10 @@ export const Electric_beg_Bal = () => {
                 <input
                     type="input"
                     className="form-control"
-                    data-name="date_from"
+                   
                     // onChange={this.datefrom}
                     // value={this.state.date_from}
+                    value={owner?.electric_m_num || ''}
                     style={inputStyle}
 
                 />
@@ -129,9 +209,9 @@ export const Electric_beg_Bal = () => {
                 <input
                     type="input"
                     className="form-control"
-                    data-name="date_from"
-                    // onChange={this.datefrom}
-                    // value={this.state.date_from}
+                    
+                    onChange={onBegBalanceValueChange}
+                    value={begBalance}
                     style={inputStyle}
 
                 />
@@ -144,17 +224,8 @@ export const Electric_beg_Bal = () => {
               </div>
 
               <div className="modal-footer">
+                <button className="btn btn-sm btn-secondary" onClick={saveElectricBill}>Save</button>
               <Link to= '/' className="btn btn-sm btn-danger">Close</Link>
-                {/* <button
-                
-                  type="button"
-                  className="btn btn-danger"
-                  
-                >
-                  Test-Try
-                </button> */}
-                
-                
               </div>
             </div>
           </div>

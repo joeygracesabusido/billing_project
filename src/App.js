@@ -42,7 +42,7 @@ function App() {
       <Route path="/testSample/" component={Test} />
       <Route path="/test2/" component={AddNewList} />
       <Route path="/water-reading-list/" component={List_of_waterReading} />
-      <Route path="/test-modal/" component={Electric_beg_Bal} />
+      <Route path="/electric-beg-bal/" component={Electric_beg_Bal} />
       <Route path="/TestModal/" component={Testmodal} />
           
     </Router>

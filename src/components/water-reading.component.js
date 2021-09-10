@@ -11,9 +11,7 @@ import Textfield from '@material-ui/core/Textfield';
 
 // import NumberFormat from 'react-number-format';
 // var NumberFormat = require('react-number-format');
-// var onwersInfo = [{
-//     "label": "JEROME SABUSIDO"
-// }]
+
 
 
 const divStyle = {
@@ -58,23 +56,12 @@ export default class WaterReading extends Component {
                 water_m_num: "",
                 w_begging_balance: ""
 
-                // num2: "",
-                // total: ""
+
 
             }
 
         }
-        // this.state = {
-        //     total: "",
-        //     num2: ""
-        // }
-        // this.state={
-        //     list: ['JEROME','ISAAC']
-        // }
-        // this.state = {water_beg_balance: []}
 
-        // this.onFullNameChange = this.onFullNameChange.bind(this);
-        // this.onSubmit = this.onSubmit.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.openModal = this.openModal.bind(this);
         this.searchOwner = this.searchOwner.bind(this);
@@ -89,17 +76,7 @@ export default class WaterReading extends Component {
 
     }
 
-    // componentDidMount() {
-    // axios.get('http://localhost:4000/billing/water-beg-bal-list')
-    //     .then(res => {
-    //         this.setState({ water_beg_balance: res.data })
 
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     })
-
-    // }
     openModal = () => {
         this.setState({ showModal: true });
     };

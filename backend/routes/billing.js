@@ -194,7 +194,7 @@ router.route('/water-reading-save').post((req, res) => {
 
     const newWater_dataDeclarations = new Water_cubic_data({
         date_from, date_to, owners_name, building_no, unit_num,
-        water_m_num, w_begging_balance, w_reading_data,  w_cubic_reading
+        water_m_num, w_begging_balance, w_reading_data, w_cubic_reading
     });
 
     newWater_dataDeclarations.save()
@@ -229,7 +229,7 @@ router
             }
 
             res.send(result);
-            
+
         } catch (e) {
             res.status(500).send({ message: e.message })
         }
@@ -238,18 +238,18 @@ router
 // this is to save electric water balance
 
 router.route('/electric-reading-save').post((req, res) => {
-    
+
     const owners_name = req.body.owners_name
     const building_no = req.body.building_no
     const unit_num = req.body.unit_num
     const electric_m_num = req.body.electric_m_num
     const e_begging_balance = req.body.e_begging_balance
-    
+
 
 
     const newelectric_dataDeclarations = new Electric_billing_beg_data({
-         owners_name, building_no, unit_num,
-         electric_m_num, e_begging_balance
+        owners_name, building_no, unit_num,
+        electric_m_num, e_begging_balance
     });
 
     newelectric_dataDeclarations.save()
@@ -259,5 +259,13 @@ router.route('/electric-reading-save').post((req, res) => {
     // Kailangan mo magreturn ng response
     // res.send({ success: true });
 })
+
+// this is for electric-beg-balance list
+router.
+    route('/elect-beg-bal-list').get((req, res) => {
+        Electric_billing_beg_data.find()
+            .then(electric_beg_balance => res.json(electric_beg_balance))
+            .catch(err => res.status(400).json('Error :' + err));
+    })
 
 module.exports = router;

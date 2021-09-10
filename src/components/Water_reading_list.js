@@ -19,6 +19,11 @@ const Water_reading_list = props => {
 
 }
 
+const theadStyles = {
+    background: 'black',
+    color: '#00ff00'
+}
+
 export default class List_of_waterReading extends Component {
 
     constructor(props) {
@@ -59,7 +64,7 @@ export default class List_of_waterReading extends Component {
 
                 <h1>Condo Owners List</h1>
                 <table className="table table-bordered table-hover" style={{ marginTop: 10 }}>
-                    <thead className="thead dark">
+                    <thead className="color dark" style={theadStyles}>
                         <tr>
                             <th>Owners Information</th>
                             <th>Total Cubic</th>

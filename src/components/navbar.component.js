@@ -32,6 +32,10 @@ export default class Navbar extends Component {
                                 <Link className="nav-link" to="/electric-beg-bal/">Add Electric Bill</Link>
                             </li>
 
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/electric-beg-bal-list/">Electric Bill-List</Link>
+                            </li>
+
 
                         </ul>
 

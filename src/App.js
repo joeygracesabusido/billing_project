@@ -19,8 +19,10 @@ import List_of_Owners from './components/onwerslist.component';
 import WaterReading from './components/water-reading.component';
 import List_of_waterReading from './components/Water_reading_list';
 
-import {Electric_beg_Bal} from './components/electric-beg-bal';
-import {Testmodal} from './components/Testmodal'
+import { Electric_beg_Bal } from './components/electric-beg-bal';
+import { Testmodal } from './components/Testmodal';
+
+import { Electric_beg_balance_list } from './components/electric-beg-balance-list';
 // import { Switch } from '@material-ui/core';
 
 // import './water-reading.css';
@@ -43,8 +45,10 @@ function App() {
       <Route path="/test2/" component={AddNewList} />
       <Route path="/water-reading-list/" component={List_of_waterReading} />
       <Route path="/electric-beg-bal/" component={Electric_beg_Bal} />
+      <Route path="/electric-beg-bal-list/" component={Electric_beg_balance_list} />
+
       <Route path="/TestModal/" component={Testmodal} />
-          
+
     </Router>
 
   );

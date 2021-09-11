@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export default class Create_owners_info extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state ={
+        this.state = {
             owners_name: '',
             building_no: '',
             unit_num: '',
             water_m_num: '',
             electric_m_num: '',
             condodues: ''
-            
+
         }
 
         // this.onFullNameChange = this.onFullNameChange.bind(this);
@@ -29,39 +29,39 @@ export default class Create_owners_info extends Component {
     //     // console.log(e.target.value)
     // }
 
-    onValueChange(e){
+    onValueChange(e) {
         this.setState({
-            [e.target.dataset.name] : e.target.value
-            
+            [e.target.dataset.name]: e.target.value
+
         })
     }
 
-    onSubmit(e){
+    onSubmit(e) {
         e.preventDefault();
 
         const owners_detail = {
-            owners_name : this.state.owners_name,
-            building_no : this.state.building_no,
-            unit_num : this.state.unit_num,
-            water_m_num : this.state.water_m_num,
-            electric_m_num : this.state.electric_m_num,
-            condodues : this.state.condodues
-            
+            owners_name: this.state.owners_name,
+            building_no: this.state.building_no,
+            unit_num: this.state.unit_num,
+            water_m_num: this.state.water_m_num,
+            electric_m_num: this.state.electric_m_num,
+            condodues: this.state.condodues
+
         }
 
-        axios.post('http://localhost:4000/billing/add_ownersinfo', owners_detail)
+        axios.post('billing/add_ownersinfo', owners_detail)
             .then(res => window.location = "/AddOwnersInfo")
             // .then(res => console.log(res.data))
-            .catch(err => console.log('Error :'+ err));
+            .catch(err => console.log('Error :' + err));
 
 
         // console.log(this.state);
     }
 
-    render(){
-        return(
-            
-            <div className="container"style={{marginTop:30}}>    
+    render() {
+        return (
+
+            <div className="container" style={{ marginTop: 30 }}>
                 <h1>Create Owners List</h1>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -97,8 +97,8 @@ export default class Create_owners_info extends Component {
                     <button type="submit" className="btn btn-primary">Submit</button>
 
                 </form>
-                
-            
+
+
             </div>
         )
     }

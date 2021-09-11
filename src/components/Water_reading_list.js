@@ -37,7 +37,7 @@ export default class List_of_waterReading extends Component {
 
     componentDidMount() {
 
-        axios.get('http://localhost:4000/billing/water-reading-list')
+        axios.get('/billing/water-reading-list')
             .then(res => {
                 this.setState({ water_cubic_data: res.data })
 

@@ -31,7 +31,7 @@ export default class EditOwnersInfo extends Component {
     //     // console.log(e.target.value)
     // }
     componentDidMount() {
-        axios.get('http://localhost:4000/billing/edit-for-owners-info/' + this.props.match.params.id)
+        axios.get('/billing/edit-for-owners-info/' + this.props.match.params.id)
             .then(res => {
                 this.setState({
                     owners_name: res.data.owners_name,
@@ -70,7 +70,7 @@ export default class EditOwnersInfo extends Component {
             condodues: this.state.condodues
         }
 
-        axios.post('http://localhost:4000/billing/updateOwner/' + this.props.match.params.id, owners_detail)
+        axios.post('/billing/updateOwner/' + this.props.match.params.id, owners_detail)
             .then(res => window.location = "/")
             // .then(res => console.log(res.data))
             .catch(err => console.log('Error :' + err));

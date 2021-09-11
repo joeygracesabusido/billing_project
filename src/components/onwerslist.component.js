@@ -33,7 +33,7 @@ export default class List_of_Owners extends Component {
 
     componentDidMount() {
 
-        axios.get('http://localhost:4000/billing/')
+        axios.get('/billing/')
             .then(res => {
                 this.setState({ owners_detail: res.data })
 

@@ -90,7 +90,7 @@ export default class WaterReading extends Component {
             e.preventDefault();
             const { data } = await axios({
                 method: 'GET',
-                url: `http://localhost:4000/billing/search-water-beg-bal`,
+                url: `/billing/search-water-beg-bal`,
                 params: {
                     term: this.state.owner.owners_name,
                 }
@@ -193,7 +193,7 @@ export default class WaterReading extends Component {
         }
 
         axios({
-            url: 'http://localhost:4000/billing/water-reading-save',
+            url: '/billing/water-reading-save',
             method: 'POST',
             data: water_cubic_data
         })

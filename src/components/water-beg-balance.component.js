@@ -46,7 +46,7 @@ export default class WaterBegBalance extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/billing/edit-for-owners-info/' + this.props.match.params.id)
+        axios.get('/billing/edit-for-owners-info/' + this.props.match.params.id)
             .then(res => {
                 this.setState({
                     owners_name: res.data.owners_name,
@@ -84,7 +84,7 @@ export default class WaterBegBalance extends Component {
             w_begging_balance: this.state.w_begging_balance
         }
 
-        axios.post('http://localhost:4000/billing/add_w_beg_bal', owners_detail)
+        axios.post('/billing/add_w_beg_bal', owners_detail)
             .then(res => window.location = "/list-of-owners")
             // .then(res => console.log(res.data))
             .catch(err => console.log('Error :' + err));

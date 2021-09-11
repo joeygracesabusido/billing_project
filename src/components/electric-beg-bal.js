@@ -58,7 +58,7 @@ export const Electric_beg_Bal = ({ history }) => {
     try {
       const { data } = await axios({
         method: 'GET',
-        url: `http://localhost:4000/billing/search-ownerinfo`,
+        url: `/billing/search-ownerinfo`,
         params: {
           term: searchValue,
         }
@@ -84,7 +84,7 @@ export const Electric_beg_Bal = ({ history }) => {
 
         await axios({
           method: 'POST',
-          url: `http://localhost:4000/billing/electric-reading-save`,
+          url: `/billing/electric-reading-save`,
           data
         });
 

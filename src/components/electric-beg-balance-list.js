@@ -14,7 +14,7 @@ export const Electric_beg_balance_list = () => {
         try {
             const { data } = await axios({
                 method: 'GET',
-                url: `http://localhost:4000/billing/elect-beg-bal-list`
+                url: `/billing/elect-beg-bal-list`
 
             })
 
@@ -30,7 +30,7 @@ export const Electric_beg_balance_list = () => {
     }
 
     const renderHeader = () => {
-        let headerElement = ['owners', 'bdlg no', 'unit no', 'begbal', 'action']
+        let headerElement = ['owners', 'bdlg no', 'unit no', 'beg bal', 'action']
 
         return headerElement.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
@@ -80,37 +80,7 @@ export const Electric_beg_balance_list = () => {
                     OwnersName: {val.owners_name} | Beg. Balance: {val.e_begging_balance}
                 </h1>
             })} */}
-            {/* <ul>
-                {electBegBal.map(data => (
-                    <li key={data.id}>{data.owners_name}</li>
-                ))}
-            </ul> */}
 
-
-            {/* <table class="table">
-                <thead>
-
-                    <tr>
-                        <th scope="col">OWNERS NAME</th>
-                        <th scope="col">BLDG. NO.</th>
-                        <th scope="col">UNIT NO.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-
-                         <tr>
-                         <td>{val.owners_name}</td>
-                         <td>{val.owners_name}</td>
-                         <td>{val.owners_name}</td>
-                        </tr>
-
-        
-
-                </tbody>
-            </table> */}
-
-            {/* <button className="btn btn-sm btn-secondary" onClick={searchOwner}>Click me</button> */}
         </div>
     )
 }

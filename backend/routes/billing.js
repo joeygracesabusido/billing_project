@@ -211,6 +211,26 @@ router.route('/water-reading-list').get((req, res) => {
         .catch(err => res.status(400).json('Error :' + err));
 })
 
+
+// UPDATE DATA for water Beginning Balance
+router.route('/update-water-beg-bal/:id').post((req, res) => {
+
+    Water_billing_beg_data.findById((req.params.id))
+        .then(water_beg_balance => {
+            water_beg_balance.w_begging_balance = req.body.w_begging_balance
+
+
+            water_beg_balance.save()
+                .then(() => res.json('New Record updated'))
+                .catch(err => res.status(400).json('Error :' + err));
+        })
+        .catch(err => res.status(400).json('Error :' + err));
+
+});
+
+
+
+
 // this is for electric water balance
 
 router
@@ -282,32 +302,32 @@ router
 
 router
     .route('/electric-readingData-save').post((req, res) => {
-    const date_from = req.body.date_from
-    const date_to = req.body.date_to
-    const owners_name = req.body.owners_name
-    const building_no = req.body.building_no
-    const unit_num = req.body.unit_num
-    const electric_m_num = req.body.electric_m_num
-    const e_begging_balance = req.body.e_begging_balance
-    const e_reading_data = req.body.e_reading_data
-    const totalElectric_reading_data = req.body.totalElectric_reading_data
+        const date_from = req.body.date_from
+        const date_to = req.body.date_to
+        const owners_name = req.body.owners_name
+        const building_no = req.body.building_no
+        const unit_num = req.body.unit_num
+        const electric_m_num = req.body.electric_m_num
+        const e_begging_balance = req.body.e_begging_balance
+        const e_reading_data = req.body.e_reading_data
+        const totalElectric_reading_data = req.body.totalElectric_reading_data
 
 
 
-    const newelectric_dataDeclarations = new Electric_reading_data({
-        date_from, date_to,
-        owners_name, building_no, unit_num,
-        electric_m_num, e_begging_balance, 
-        e_reading_data, totalElectric_reading_data
-    });
+        const newelectric_dataDeclarations = new Electric_reading_data({
+            date_from, date_to,
+            owners_name, building_no, unit_num,
+            electric_m_num, e_begging_balance,
+            e_reading_data, totalElectric_reading_data
+        });
 
-    newelectric_dataDeclarations.save()
-        .then(electric_readingData => res.json('New Record Added'))
-        .catch(err => res.status(400).json('Error :' + err));
+        newelectric_dataDeclarations.save()
+            .then(electric_readingData => res.json('New Record Added'))
+            .catch(err => res.status(400).json('Error :' + err));
 
-    // Kailangan mo magreturn ng response
-    // res.send({ success: true });
-})
+        // Kailangan mo magreturn ng response
+        // res.send({ success: true });
+    })
 
 // this is to search for onwers beg. balance
 
@@ -334,6 +354,20 @@ router
         }
     })
 
+// UPDATE DATA for Electric Beginning Balance
+router.route('/update-elec-beg-bal/:id').post((req, res) => {
 
+    Electric_billing_beg_data.findById((req.params.id))
+        .then(electric_beg_balance => {
+            electric_beg_balance.e_begging_balance = req.body.e_begging_balance
+
+
+            electric_beg_balance.save()
+                .then(() => res.json('New Record updated'))
+                .catch(err => res.status(400).json('Error :' + err));
+        })
+        .catch(err => res.status(400).json('Error :' + err));
+
+});
 
 module.exports = router;

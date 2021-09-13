@@ -50,6 +50,7 @@ export default class WaterReading extends Component {
             // total: ""
             showModal: false,
             owner: {
+                id: "",
                 owners_name: "",
                 building_no: "",
                 unit_num: "",
@@ -100,6 +101,7 @@ export default class WaterReading extends Component {
                 this.setState({
                     owner: {
                         ...this.state.owner,
+                        id: data._id,
                         owners_name: data.owners_name,
                         building_no: data.building_no,
                         unit_num: data.unit_num,
@@ -199,6 +201,21 @@ export default class WaterReading extends Component {
         })
             .then(res => window.location = "/water-reading-list")
             .catch(err => console.log('Error :' + err));
+
+        // this is for update of water beg balance
+
+        // const updatewaterBeg = {
+
+        //     w_begging_balance: this.state.total
+
+
+        // }
+        // axios.post('/update-water-beg-bal/' + this.state.owner._id, updatewaterBeg
+        // )
+        // console.log(updatewaterBeg)
+        //     .then(res => window.location = "/water-reading-list")
+
+
         // axios.post('http://localhost:4000/billing/water-reading-save', water_cubic_data)
         //     .then(res => window.location = "/list-of-owners")
         //     // .then(res => console.log(res.data))

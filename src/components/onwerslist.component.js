@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-
+const buttonMargin = {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'space-between',
+    height: 36,
+    marginTop: 20,
+    borderRadius: 2,
+    marginHorizontal: 2,
+    width: '15%',
+    margin: '5px'
+  
+  };
 
 const Owners_info = props => {
     return (
@@ -72,7 +84,22 @@ export default class List_of_Owners extends Component {
                     </tbody>
 
                 </table>
+            
+                <Link to='/electric-beg-bal/' 
+                className="btn btn-sm btn-primary" style={buttonMargin}>
+                Add Electric Beg Balance
+                </Link>
+                
+                <Link to='/electric-beg-bal-list/' 
+                className="btn btn-sm btn-primary" style={buttonMargin}>
+                Add Electric Beg. List
+                </Link>
 
+                <Link to='/electric-readingData/' 
+                className="btn btn-sm btn-primary" style={buttonMargin}>
+                Add Electric ReadingData
+                </Link>
+           
             </div>
         )
     }

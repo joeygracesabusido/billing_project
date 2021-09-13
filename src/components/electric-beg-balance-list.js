@@ -38,24 +38,25 @@ export const Electric_beg_balance_list = () => {
     }
 
     const removeData = (id) => {
-
-        axios.delete(`${URL}/${id}`).then(res => {
-            const del = electBegBal.filter(electBegBal => id !== id)
+        axios.delete(`${`/billing/elect-beg-bal-list`}/${id}`).then(res => {
+        // axios.delete(`/billing/elect-beg-bal-list/` + id).then(res => {
+            const del = electBegBal.filter((el => el._id !== id))
             setElectBegBal(del)
+            alert('Record has been deleted!');
         })
     }
 
     const renderBody = () => {
-        return electBegBal && electBegBal.map(({ id, owners_name, building_no, unit_num, e_begging_balance }) => {
+        return electBegBal && electBegBal.map(({ _id, owners_name, building_no, unit_num, e_begging_balance }) => {
             return (
-                <tr key={id}>
+                <tr key={_id}>
 
                     <td>{owners_name}</td>
                     <td>{building_no}</td>
                     <td>{unit_num}</td>
                     <td>{e_begging_balance}</td>
                     <td className='opration'>
-                        <button className='btn btn-sm btn-danger' onClick={() => removeData(id)}>Delete</button>
+                        <button className='btn btn-sm btn-danger' onClick={() => removeData(_id)}>Delete</button>
                     </td>
                 </tr>
             )

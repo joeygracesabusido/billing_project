@@ -23,6 +23,8 @@ import { Electric_beg_Bal } from './components/electric-beg-bal';
 import { Testmodal } from './components/Testmodal';
 
 import { Electric_beg_balance_list } from './components/electric-beg-balance-list';
+
+import {Add_electric_readingData} from './components/add-electric-readingData.component'
 // import { Switch } from '@material-ui/core';
 
 // import './water-reading.css';
@@ -46,6 +48,7 @@ function App() {
       <Route path="/water-reading-list/" component={List_of_waterReading} />
       <Route path="/electric-beg-bal/" component={Electric_beg_Bal} />
       <Route path="/electric-beg-bal-list/" component={Electric_beg_balance_list} />
+      <Route path="/electric-readingData/" component={Add_electric_readingData} />
 
       <Route path="/TestModal/" component={Testmodal} />
 

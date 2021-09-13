@@ -4,7 +4,8 @@ const { request, response } = require('express');
 let Owners_info = require('../models/owners.model');
 let Water_billing_beg_data = require('../models/waterbilling-data.model');
 let Water_cubic_data = require('../models/water-reading.model');
-let Electric_billing_beg_data = require('../models/electric-reading,model')
+let Electric_billing_beg_data = require('../models/electric-reading.model');
+let Electric_reading_data = require('../models/eletric_readingData.model')
 
 
 router.route('/').get((req, res) => {
@@ -261,11 +262,78 @@ router.route('/electric-reading-save').post((req, res) => {
 })
 
 // this is for electric-beg-balance list
-router.
-    route('/elect-beg-bal-list').get((req, res) => {
+router
+    .route('/elect-beg-bal-list').get((req, res) => {
         Electric_billing_beg_data.find()
             .then(electric_beg_balance => res.json(electric_beg_balance))
             .catch(err => res.status(400).json('Error :' + err));
     })
+
+// this is for deleting electric beginning Balance
+router
+    .route('/elect-beg-bal-list/:id').delete((req, res) => {
+        Electric_billing_beg_data.findByIdAndDelete(req.params.id)
+            .then(electric_beg_balance => res.json('Record was deleted.'))
+            .catch(err => res.status(400).json('Error :' + err));
+    });
+
+
+// this function is to add record for electric reading data
+
+router
+    .route('/electric-readingData-save').post((req, res) => {
+    const date_from = req.body.date_from
+    const date_to = req.body.date_to
+    const owners_name = req.body.owners_name
+    const building_no = req.body.building_no
+    const unit_num = req.body.unit_num
+    const electric_m_num = req.body.electric_m_num
+    const e_begging_balance = req.body.e_begging_balance
+    const e_reading_data = req.body.e_reading_data
+    const totalElectric_reading_data = req.body.totalElectric_reading_data
+
+
+
+    const newelectric_dataDeclarations = new Electric_reading_data({
+        date_from, date_to,
+        owners_name, building_no, unit_num,
+        electric_m_num, e_begging_balance, 
+        e_reading_data, totalElectric_reading_data
+    });
+
+    newelectric_dataDeclarations.save()
+        .then(electric_readingData => res.json('New Record Added'))
+        .catch(err => res.status(400).json('Error :' + err));
+
+    // Kailangan mo magreturn ng response
+    // res.send({ success: true });
+})
+
+// this is to search for onwers beg. balance
+
+router
+    .route('/search-electricBeg-bal')
+    .get(async (req, res, next) => {
+        try {
+            const result = await Electric_billing_beg_data
+                .findOne({
+                    owners_name: {
+                        $regex: req.query.term, // match either same value
+                        $options: 'i' // case insensitive
+                    }
+                });
+
+            if (!result) {
+                return res.status(404).send({ message: 'No record found.' });
+            }
+
+            res.send(result);
+
+        } catch (e) {
+            res.status(500).send({ message: e.message })
+        }
+    })
+
+
 
 module.exports = router;
